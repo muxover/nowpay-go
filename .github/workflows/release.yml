@@ -1,0 +1,41 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Prepare release notes
+        id: notes
+        run: |
+          NOTES_FILE="release-notes/${{ github.ref_name }}.md"
+          if [ -f "$NOTES_FILE" ]; then
+            echo "body_path=$NOTES_FILE" >> "$GITHUB_OUTPUT"
+          else
+            echo "Release ${{ github.ref_name }}" > release-notes-fallback.md
+            echo "body_path=release-notes-fallback.md" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: NowPay Go ${{ github.ref_name }}
+          body_path: ${{ steps.notes.outputs.body_path }}
+          generate_release_notes: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    timeout-minutes: 2
