@@ -18,5 +18,17 @@ type EstimateRequest struct {
 
 // MinAmountResponse is the minimum payment amount for a currency.
 type MinAmountResponse struct {
-	MinAmount float64 `json:"min_amount"`
+	CurrencyFrom   string  `json:"currency_from,omitempty"`
+	CurrencyTo     string  `json:"currency_to,omitempty"`
+	MinAmount      float64 `json:"min_amount"`
+	FiatEquivalent float64 `json:"fiat_equivalent,omitempty"`
+}
+
+// MinAmountParams holds optional query params for GET /v1/min-amount.
+type MinAmountParams struct {
+	CurrencyFrom     string
+	CurrencyTo       string
+	FiatEquivalent   string // e.g. "usd"
+	IsFixedRate      bool
+	IsFeePaidByUser  bool
 }

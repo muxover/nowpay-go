@@ -46,4 +46,47 @@ type ListPaymentsParams struct {
 	OrderBy     string `json:"orderBy,omitempty"`
 	DateFrom    string `json:"dateFrom,omitempty"`
 	DateTo      string `json:"dateTo,omitempty"`
+	InvoiceID   string `json:"invoiceId,omitempty"`
+}
+
+// CreateInvoicePaymentRequest is the request for creating a payment from an invoice (POST /v1/invoice-payment).
+type CreateInvoicePaymentRequest struct {
+	IID               int64   `json:"iid"` // invoice id
+	PayCurrency       string  `json:"pay_currency"`
+	PurchaseID        string  `json:"purchase_id,omitempty"`
+	OrderDescription  string  `json:"order_description,omitempty"`
+	CustomerEmail     string  `json:"customer_email,omitempty"`
+	PayoutAddress     string  `json:"payout_address,omitempty"`
+	PayoutExtraID     string  `json:"payout_extra_id,omitempty"`
+	PayoutCurrency    string  `json:"payout_currency,omitempty"`
+}
+
+// UpdateMerchantEstimateResponse is the response from POST /v1/payment/:id/update-merchant-estimate.
+type UpdateMerchantEstimateResponse struct {
+	ID                     int64   `json:"id,omitempty"`
+	TokenID                int64   `json:"token_id,omitempty"`
+	PayAmount              float64 `json:"pay_amount,omitempty"`
+	ExpirationEstimateDate string  `json:"expiration_estimate_date,omitempty"`
+}
+
+// PaymentFlow holds detailed payment flow/processing info (e.g. confirmations).
+type PaymentFlow struct {
+	PaymentID     int64    `json:"payment_id,omitempty"`
+	PaymentStatus string   `json:"payment_status,omitempty"`
+	Confirmations []string `json:"confirmations,omitempty"`
+	// Extend with API-specific fields as needed.
+}
+
+// RefundRequest is the request body for refunding a payment.
+type RefundRequest struct {
+	PaymentID int64   `json:"payment_id"`
+	RefundType string `json:"refund_type,omitempty"` // e.g. "full" or "partial"
+	Amount    float64 `json:"amount,omitempty"`     // for partial refund
+}
+
+// RefundResponse is the response from a refund request.
+type RefundResponse struct {
+	RefundID   string `json:"refund_id,omitempty"`
+	PaymentID  int64  `json:"payment_id,omitempty"`
+	Status     string `json:"status,omitempty"`
 }

@@ -1,13 +1,18 @@
 package models
 
-// Currency represents a supported or available currency.
+// Currency represents a supported or available currency (full detail from /v1/full-currencies).
 type Currency struct {
-	Code        string `json:"code"`
-	Name        string `json:"name,omitempty"`
-	Logo        string `json:"logo_url,omitempty"`
-	Network     string `json:"network,omitempty"`
-	IsFiat      bool   `json:"is_fiat,omitempty"`
-	HasExternal bool   `json:"has_external,omitempty"`
+	ID               int     `json:"id,omitempty"`
+	Code             string  `json:"code"`
+	Name             string  `json:"name,omitempty"`
+	Enable           bool    `json:"enable,omitempty"`
+	WalletRegex      string  `json:"wallet_regex,omitempty"`
+	Priority         int     `json:"priority,omitempty"`
+	ExtraIDExists    bool    `json:"extra_id_exists,omitempty"`
+	LogoURL          string  `json:"logo_url,omitempty"`
+	Network          string  `json:"network,omitempty"`
+	SmartContract    *string `json:"smart_contract,omitempty"`
+	NetworkPrecision *int    `json:"network_precision,omitempty"`
 }
 
 // CurrenciesResponse is the response for supported/available currencies.

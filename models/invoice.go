@@ -22,11 +22,15 @@ type Invoice struct {
 
 // CreateInvoiceRequest is the request body for creating an invoice.
 type CreateInvoiceRequest struct {
-	PriceAmount      float64 `json:"price_amount"`
-	PriceCurrency    string  `json:"price_currency"`
-	OrderID          string  `json:"order_id,omitempty"`
-	OrderDescription string  `json:"order_description,omitempty"`
-	SuccessURL       string  `json:"success_url,omitempty"`
-	CancelURL        string  `json:"cancel_url,omitempty"`
+	PriceAmount       float64 `json:"price_amount"`
+	PriceCurrency     string  `json:"price_currency"`
+	PayCurrency       string  `json:"pay_currency,omitempty"`
+	OrderID           string  `json:"order_id,omitempty"`
+	OrderDescription  string  `json:"order_description,omitempty"`
+	SuccessURL        string  `json:"success_url,omitempty"`
+	CancelURL         string  `json:"cancel_url,omitempty"`
+	PartiallyPaidURL  string  `json:"partially_paid_url,omitempty"`
 	IPNCallbackURL    string  `json:"ipn_callback_url,omitempty"`
+	IsFixedRate       bool    `json:"is_fixed_rate,omitempty"`
+	IsFeePaidByUser   bool    `json:"is_fee_paid_by_user,omitempty"`
 }

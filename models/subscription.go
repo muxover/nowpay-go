@@ -24,3 +24,14 @@ type CreateSubscriptionRequest struct {
 	Period           string  `json:"period,omitempty"`
 	CallbackURL      string  `json:"callback_url,omitempty"`
 }
+
+// UpdateSubscriptionRequest is the request body for updating a subscription.
+type UpdateSubscriptionRequest struct {
+	PriceAmount      *float64 `json:"price_amount,omitempty"`
+	PriceCurrency    string   `json:"price_currency,omitempty"`
+	PayCurrency      string   `json:"pay_currency,omitempty"`
+	OrderDescription string   `json:"order_description,omitempty"`
+	Period           string   `json:"period,omitempty"`
+	CallbackURL      string   `json:"callback_url,omitempty"`
+	Status           string   `json:"status,omitempty"`
+}
