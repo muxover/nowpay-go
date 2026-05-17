@@ -6,17 +6,17 @@ import (
 
 // EventType constants for webhook events.
 const (
-	EventPaymentCreated   = "payment_created"
-	EventPaymentConfirmed  = "payment_confirmed"
-	EventPaymentFinished  = "payment_finished"
-	EventPaymentFailed     = "payment_failed"
-	EventPaymentRefunded   = "payment_refunded"
-	EventInvoiceCreated   = "invoice_created"
-	EventInvoicePaid      = "invoice_paid"
-	EventPayoutCreated    = "payout_created"
-	EventPayoutFinished   = "payout_finished"
-	EventPayoutFailed     = "payout_failed"
-	EventSubscriptionCreated = "subscription_created"
+	EventPaymentCreated        = "payment_created"
+	EventPaymentConfirmed      = "payment_confirmed"
+	EventPaymentFinished       = "payment_finished"
+	EventPaymentFailed         = "payment_failed"
+	EventPaymentRefunded       = "payment_refunded"
+	EventInvoiceCreated        = "invoice_created"
+	EventInvoicePaid           = "invoice_paid"
+	EventPayoutCreated         = "payout_created"
+	EventPayoutFinished        = "payout_finished"
+	EventPayoutFailed          = "payout_failed"
+	EventSubscriptionCreated   = "subscription_created"
 	EventSubscriptionCancelled = "subscription_cancelled"
 )
 
@@ -25,19 +25,18 @@ type Event struct {
 	Type    string          `json:"type,omitempty"`
 	Payload json.RawMessage `json:"payload,omitempty"`
 	// Raw body fields often sent by NOWPayments (payment_id, status, etc.)
-	PaymentID     int64   `json:"payment_id,omitempty"`
-	PaymentStatus string  `json:"payment_status,omitempty"`
-	PayAmount     float64 `json:"pay_amount,omitempty"`
-	PayCurrency   string  `json:"pay_currency,omitempty"`
-	PriceAmount   float64 `json:"price_amount,omitempty"`
-	PriceCurrency string  `json:"price_currency,omitempty"`
-	OrderID       string  `json:"order_id,omitempty"`
-	InvoiceID     string  `json:"invoice_id,omitempty"`
-	OutcomeAmount float64 `json:"outcome_amount,omitempty"`
-	OutcomeCurrency string `json:"outcome_currency,omitempty"`
+	PaymentID       int64   `json:"payment_id,omitempty"`
+	PaymentStatus   string  `json:"payment_status,omitempty"`
+	PayAmount       float64 `json:"pay_amount,omitempty"`
+	PayCurrency     string  `json:"pay_currency,omitempty"`
+	PriceAmount     float64 `json:"price_amount,omitempty"`
+	PriceCurrency   string  `json:"price_currency,omitempty"`
+	OrderID         string  `json:"order_id,omitempty"`
+	InvoiceID       string  `json:"invoice_id,omitempty"`
+	OutcomeAmount   float64 `json:"outcome_amount,omitempty"`
+	OutcomeCurrency string  `json:"outcome_currency,omitempty"`
 }
 
-// PaymentEvent is a payment-related webhook payload.
 type PaymentEvent struct {
 	PaymentID     int64   `json:"payment_id"`
 	PaymentStatus string  `json:"payment_status"`
@@ -51,16 +50,15 @@ type PaymentEvent struct {
 	UpdatedAt     string  `json:"updated_at,omitempty"`
 }
 
-// InvoiceEvent is an invoice-related webhook payload.
 type InvoiceEvent struct {
-	InvoiceID      string  `json:"invoice_id,omitempty"`
-	PaymentStatus  string  `json:"payment_status,omitempty"`
-	PriceAmount    float64 `json:"price_amount,omitempty"`
-	PriceCurrency  string  `json:"price_currency,omitempty"`
-	PayAddress     string  `json:"pay_address,omitempty"`
-	PayAmount      float64 `json:"pay_amount,omitempty"`
-	ActuallyPaid   float64 `json:"actually_paid,omitempty"`
-	OrderID        string  `json:"order_id,omitempty"`
+	InvoiceID     string  `json:"invoice_id,omitempty"`
+	PaymentStatus string  `json:"payment_status,omitempty"`
+	PriceAmount   float64 `json:"price_amount,omitempty"`
+	PriceCurrency string  `json:"price_currency,omitempty"`
+	PayAddress    string  `json:"pay_address,omitempty"`
+	PayAmount     float64 `json:"pay_amount,omitempty"`
+	ActuallyPaid  float64 `json:"actually_paid,omitempty"`
+	OrderID       string  `json:"order_id,omitempty"`
 }
 
 // ParseEvent parses the webhook body into an Event. The body is the raw JSON POST body.

@@ -3,32 +3,39 @@
 <div align="center">
 
 [![CI](https://github.com/muxover/nowpay-go/actions/workflows/ci.yml/badge.svg)](https://github.com/muxover/nowpay-go/actions/workflows/ci.yml)
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Go Reference](https://pkg.go.dev/badge/github.com/muxover/nowpay-go.svg)](https://pkg.go.dev/github.com/muxover/nowpay-go)
 [![Go Report Card](https://goreportcard.com/badge/github.com/muxover/nowpay-go)](https://goreportcard.com/report/github.com/muxover/nowpay-go)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Release](https://img.shields.io/github/v/release/muxover/nowpay-go)](https://github.com/muxover/nowpay-go/releases/latest)
 
-**Go SDK for NOWPayments — payments, fiat, webhooks, Telegram.**
+**Go SDK for NOWPayments — payments, fiat, webhooks.**
 
 </div>
 
 ---
 
-NowPay Go is a production-ready Go client for the [NOWPayments](https://nowpayments.io) cryptocurrency payment gateway. Use it in backends, bots, and services to create payments, invoices, estimates (including USD/EUR and other fiat), payouts, and subscriptions, with webhook verification and Telegram bot helpers.
+NowPay Go is a production-ready Go client for the [NOWPayments](https://nowpayments.io) cryptocurrency payment gateway. Use it in backends and services to create payments, invoices, estimates (including USD/EUR and other fiat), payouts, and subscriptions, with webhook verification.
+
+---
 
 ## Features
 
 - Full NOWPayments REST API: payments, invoices, currencies, estimates, payouts, subscriptions
+- API status check, payment flow details, refunds, batch (mass) payouts, subscription cancel/update
 - Price conversion and fiat: USD, EUR and other fiat in estimates and models
 - Webhook signature verification and strongly typed event parsing
-- Telegram helpers: payment buttons, invoice messages
 - Context support, configurable HTTP client, structured errors
 - Minimal dependencies, idiomatic Go
+
+---
 
 ## Installation
 
 ```bash
 go get github.com/muxover/nowpay-go
 ```
+
+---
 
 ## Quick Start
 
@@ -60,18 +67,23 @@ func main() {
 }
 ```
 
+---
+
 ## API overview
 
 | Module | Methods |
 |--------|--------|
-| **Payments** | `Create`, `Get`, `List` |
+| **Client** | `Status` — API health; `Auth` — JWT (email/password); `Balance` — balance per currency |
+| **Payments** | `Create`, `CreateFromInvoice`, `Get`, `List`, `GetFlow`, `Refund`, `UpdateMerchantEstimate` |
 | **Invoices** | `Create`, `Get` |
-| **Currencies** | `Supported`, `Available` |
-| **Estimates** | `Estimate`, `EstimateByPrice`, `MinAmount` (crypto and fiat: USD, EUR, etc.) |
-| **Payouts** | `Create`, `Get` |
-| **Subscriptions** | `Create`, `Get` |
+| **Currencies** | `Supported`, `SupportedWithFixedRate`, `Available`, `FullCurrencies`, `MerchantCoins` |
+| **Estimates** | `Estimate`, `EstimateByPrice`, `MinAmount`, `MinAmountEx` (with fiat_equivalent, is_fixed_rate) |
+| **Payouts** | `Create`, `Get`, `List`, `BatchCreate`, `ValidateAddress`, `MinAmountForWithdrawal`, `Fee`, `Cancel`, `Verify` |
+| **Subscriptions** | `Create`, `Get`, `Cancel`, `Update` |
 
-All methods take `context.Context` as the first argument.
+All methods take `context.Context` as the first argument. For List payments and Create payout, some accounts require a JWT: use `Auth(ctx, email, password)` and set `Config.Token` when creating the client.
+
+---
 
 ## Price conversion and fiat
 
@@ -85,6 +97,8 @@ min, err := client.Estimates.MinAmount(ctx, "usd", "btc")
 ```
 
 Payment and estimate models include `PriceCurrency`, `PriceAmount`, and API-provided fiat fields where applicable.
+
+---
 
 ## Webhook setup
 
@@ -107,40 +121,42 @@ ev, err := webhook.ParseEvent(body)
 
 Event types include payment_created, payment_confirmed, payment_finished, payment_failed, and invoice/payout/subscription events.
 
-## Telegram bot example
-
-Build payment messages and inline keyboards for Telegram:
-
-```go
-import (
-	"github.com/muxover/nowpay-go"
-	"github.com/muxover/nowpay-go/telegram"
-)
-
-payment, _ := client.Payments.Create(ctx, req)
-msg := telegram.InvoiceMessage(payment)
-kb := telegram.PaymentKeyboard("Pay with crypto", paymentURL)
-// Send msg and kb to the user (e.g. with telegram-bot-api or similar)
-```
-
-See [examples/telegram_bot](examples/telegram_bot) for a minimal flow.
+---
 
 ## Examples
 
 - [Create payment](examples/create_payment) — create a payment and print result
-- [Telegram bot](examples/telegram_bot) — payment + message and keyboard
 - [Webhook server](examples/webhook_server) — verify IPN and parse events
 
 Run with required env vars (e.g. `API_KEY`, `IPN_SECRET` for webhook).
+
+---
 
 ## Configuration
 
 | Field | Description |
 |-------|-------------|
 | `APIKey` | Required. Your NOWPayments API key. |
+| `Token` | Optional. JWT from `Auth()` for List payments / Create payout when required. |
 | `BaseURL` | Optional. Default `https://api.nowpayments.io/v1`. |
 | `Timeout` | Optional. HTTP timeout (default 30s). |
 | `HTTPClient` | Optional. Custom `*http.Client`. |
+| `Retry` | Optional. Retry on 429 and 5xx: `MaxRetries`, `InitialBackoff`, `MaxBackoff`. Zero = no retries. |
+
+Example with retry (production):
+
+```go
+client := nowpay.NewClient(nowpay.Config{
+	APIKey: apiKey,
+	Retry: nowpay.RetryConfig{
+		MaxRetries:     3,
+		InitialBackoff: 1 * time.Second,
+		MaxBackoff:     30 * time.Second,
+	},
+})
+```
+
+---
 
 ## Error handling
 
@@ -155,13 +171,19 @@ if errors.Is(err, nowpay.ErrInvalidSignature) { ... }
 
 Available: `ErrInvalidAPIKey`, `ErrPaymentNotFound`, `ErrInvoiceNotFound`, `ErrPayoutNotFound`, `ErrSubscriptionNotFound`, `ErrRateLimited`, `ErrInvalidSignature`, `ErrBadRequest`, `ErrValidation`, `ErrServerError`, `ErrNotFound`. Use `nowpay.IsAPIError(err)` to detect any API error.
 
+---
+
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md).
 
+---
+
 ## License
 
 Licensed under [MIT](LICENSE).
+
+---
 
 ## Links
 

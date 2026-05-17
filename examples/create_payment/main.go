@@ -1,4 +1,3 @@
-// Example: create a payment using NowPay Go.
 // Run with: API_KEY=your_key go run .
 package main
 

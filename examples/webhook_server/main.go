@@ -1,4 +1,3 @@
-// Example: HTTP server that verifies NOWPayments IPN webhooks and parses events.
 // Run with: IPN_SECRET=your_ipn_secret go run .
 // Set your IPN callback URL in NOWPayments dashboard to http://your-host/webhook
 package main

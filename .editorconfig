@@ -6,9 +6,9 @@ insert_final_newline = true
 trim_trailing_whitespace = true
 charset = utf-8
 
-[*.{go,rs,py,js,ts}]
+[*.{go,rs,py,js,ts,c,cpp,java,kt}]
 indent_style = tab
 
-[*.{yml,yaml,json,md,toml}]
+[*.{yml,yaml,json,md,toml,html,css,scss}]
 indent_style = space
 indent_size = 2
