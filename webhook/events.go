@@ -26,8 +26,10 @@ type Event struct {
 	Payload json.RawMessage `json:"payload,omitempty"`
 	// Raw body fields often sent by NOWPayments (payment_id, status, etc.)
 	PaymentID       int64   `json:"payment_id,omitempty"`
+	ParentPaymentID int64   `json:"parent_payment_id,omitempty"`
 	PaymentStatus   string  `json:"payment_status,omitempty"`
 	PayAmount       float64 `json:"pay_amount,omitempty"`
+	ActuallyPaid    float64 `json:"actually_paid,omitempty"`
 	PayCurrency     string  `json:"pay_currency,omitempty"`
 	PriceAmount     float64 `json:"price_amount,omitempty"`
 	PriceCurrency   string  `json:"price_currency,omitempty"`
@@ -38,16 +40,22 @@ type Event struct {
 }
 
 type PaymentEvent struct {
-	PaymentID     int64   `json:"payment_id"`
-	PaymentStatus string  `json:"payment_status"`
-	PayAddress    string  `json:"pay_address,omitempty"`
-	PayAmount     float64 `json:"pay_amount,omitempty"`
-	PayCurrency   string  `json:"pay_currency,omitempty"`
-	PriceAmount   float64 `json:"price_amount,omitempty"`
-	PriceCurrency string  `json:"price_currency,omitempty"`
-	OrderID       string  `json:"order_id,omitempty"`
-	CreatedAt     string  `json:"created_at,omitempty"`
-	UpdatedAt     string  `json:"updated_at,omitempty"`
+	PaymentID       int64   `json:"payment_id"`
+	ParentPaymentID int64   `json:"parent_payment_id,omitempty"`
+	InvoiceID       int64   `json:"invoice_id,omitempty"`
+	PaymentStatus   string  `json:"payment_status"`
+	PayAddress      string  `json:"pay_address,omitempty"`
+	PayAmount       float64 `json:"pay_amount,omitempty"`
+	ActuallyPaid    float64 `json:"actually_paid,omitempty"`
+	PayCurrency     string  `json:"pay_currency,omitempty"`
+	PriceAmount     float64 `json:"price_amount,omitempty"`
+	PriceCurrency   string  `json:"price_currency,omitempty"`
+	OrderID         string  `json:"order_id,omitempty"`
+	PurchaseID      string  `json:"purchase_id,omitempty"`
+	OutcomeAmount   float64 `json:"outcome_amount,omitempty"`
+	OutcomeCurrency string  `json:"outcome_currency,omitempty"`
+	CreatedAt       string  `json:"created_at,omitempty"`
+	UpdatedAt       string  `json:"updated_at,omitempty"`
 }
 
 type InvoiceEvent struct {
@@ -103,12 +111,16 @@ func (e *Event) AsPaymentEvent() (*PaymentEvent, error) {
 	if len(raw) == 0 {
 		// Use top-level fields
 		p.PaymentID = e.PaymentID
+		p.ParentPaymentID = e.ParentPaymentID
 		p.PaymentStatus = e.PaymentStatus
 		p.PayAmount = e.PayAmount
+		p.ActuallyPaid = e.ActuallyPaid
 		p.PayCurrency = e.PayCurrency
 		p.PriceAmount = e.PriceAmount
 		p.PriceCurrency = e.PriceCurrency
 		p.OrderID = e.OrderID
+		p.OutcomeAmount = e.OutcomeAmount
+		p.OutcomeCurrency = e.OutcomeCurrency
 		return &p, nil
 	}
 	if err := json.Unmarshal(raw, &p); err != nil {

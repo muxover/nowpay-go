@@ -8,7 +8,11 @@ type Currency struct {
 	WalletRegex      string  `json:"wallet_regex,omitempty"`
 	Priority         int     `json:"priority,omitempty"`
 	ExtraIDExists    bool    `json:"extra_id_exists,omitempty"`
+	ExtraIDRegex     *string `json:"extra_id_regex,omitempty"`
 	LogoURL          string  `json:"logo_url,omitempty"`
+	Track            bool    `json:"track,omitempty"`
+	CgID             string  `json:"cg_id,omitempty"`
+	IsMaxlimit       bool    `json:"is_maxlimit,omitempty"`
 	Network          string  `json:"network,omitempty"`
 	SmartContract    *string `json:"smart_contract,omitempty"`
 	NetworkPrecision *int    `json:"network_precision,omitempty"`

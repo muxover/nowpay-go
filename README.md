@@ -4,7 +4,6 @@
 
 [![CI](https://github.com/muxover/nowpay-go/actions/workflows/ci.yml/badge.svg)](https://github.com/muxover/nowpay-go/actions/workflows/ci.yml)
 [![Go Reference](https://pkg.go.dev/badge/github.com/muxover/nowpay-go.svg)](https://pkg.go.dev/github.com/muxover/nowpay-go)
-[![Go Report Card](https://goreportcard.com/badge/github.com/muxover/nowpay-go)](https://goreportcard.com/report/github.com/muxover/nowpay-go)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Release](https://img.shields.io/github/v/release/muxover/nowpay-go)](https://github.com/muxover/nowpay-go/releases/latest)
 
@@ -20,8 +19,8 @@ NowPay Go is a production-ready Go client for the [NOWPayments](https://nowpayme
 
 ## Features
 
-- Full NOWPayments REST API: payments, invoices, currencies, estimates, payouts, subscriptions
-- API status check, payment flow details, refunds, batch (mass) payouts, subscription cancel/update
+- Full NOWPayments REST API: payments, invoices, currencies, estimates, mass payouts, recurring payments, conversions, custody (customer management), fiat payouts
+- API status check, mass (batch) payouts with 2FA verify, plan-based recurring payments, currency conversions
 - Price conversion and fiat: USD, EUR and other fiat in estimates and models
 - Webhook signature verification and strongly typed event parsing
 - Context support, configurable HTTP client, structured errors
@@ -74,14 +73,47 @@ func main() {
 | Module | Methods |
 |--------|--------|
 | **Client** | `Status` — API health; `Auth` — JWT (email/password); `Balance` — balance per currency |
-| **Payments** | `Create`, `CreateFromInvoice`, `Get`, `List`, `GetFlow`, `Refund`, `UpdateMerchantEstimate` |
-| **Invoices** | `Create`, `Get` |
-| **Currencies** | `Supported`, `SupportedWithFixedRate`, `Available`, `FullCurrencies`, `MerchantCoins` |
+| **Payments** | `Create`, `CreateFromInvoice`, `Get`, `List`, `UpdateMerchantEstimate` |
+| **Invoices** | `Create` |
+| **Currencies** | `Supported`, `SupportedWithFixedRate`, `FullCurrencies`, `MerchantCoins` |
 | **Estimates** | `Estimate`, `EstimateByPrice`, `MinAmount`, `MinAmountEx` (with fiat_equivalent, is_fixed_rate) |
-| **Payouts** | `Create`, `Get`, `List`, `BatchCreate`, `ValidateAddress`, `MinAmountForWithdrawal`, `Fee`, `Cancel`, `Verify` |
-| **Subscriptions** | `Create`, `Get`, `Cancel`, `Update` |
+| **Payouts** | `Create`, `Get`, `List`, `ValidateAddress`, `Verify`, `Cancel`, `CancelBatch`, `MinAmountForWithdrawal`, `Fee` |
+| **Subscriptions** | `CreatePlan`, `UpdatePlan`, `GetPlan`, `ListPlans`, `Create`, `Get`, `List`, `Delete` |
+| **Conversions** | `Create`, `Get`, `List` |
+| **Customers** (Custody) | `Create`, `Balance`, `List`, `Payments`, `Transfers`, `GetTransfer`, `Transfer`, `Deposit`, `WriteOff`, `DepositWithPayment` |
+| **FiatPayouts** | `Providers`, `FiatCurrencies`, `CryptoCurrencies`, `PaymentMethods`, `CreateAccount`, `Accounts`, `Request`, `List` |
 
-All methods take `context.Context` as the first argument. For List payments and Create payout, some accounts require a JWT: use `Auth(ctx, email, password)` and set `Config.Token` when creating the client.
+All methods take `context.Context` as the first argument. Payouts, conversions, custody, and (on most accounts) List payments require a JWT: call `Auth(ctx, email, password)` and set `Config.Token` when creating the client.
+
+---
+
+## Project Layout
+
+```
+nowpay-go/
+├── client.go              Client, Config, and every service (payments, payouts, custody, …)
+├── internal/
+│   ├── http.go            Low-level HTTP transport: auth headers, JSON, retries
+│   └── errors.go          Sentinel errors and APIError
+├── models/
+│   ├── types.go           FlexInt / FlexFloat — decode numbers sent as strings
+│   ├── payment.go         Payment, create/list requests
+│   ├── invoice.go         Invoice models
+│   ├── currency.go        Currency listings
+│   ├── estimate.go        Estimate and min-amount models
+│   ├── status.go          Status, auth, balance
+│   ├── payout.go          Mass payout models
+│   ├── subscription.go    Recurring payment plans and subscriptions
+│   ├── conversion.go      Currency conversion models
+│   ├── custody.go         Customer management (sub-partner) models
+│   └── fiatpayout.go      Fiat payout models
+├── webhook/
+│   ├── verify.go          IPN HMAC-SHA512 signature verification
+│   └── events.go          Webhook event parsing
+└── examples/
+    ├── create_payment/    Create a payment
+    └── webhook_server/    Verify and parse IPN callbacks
+```
 
 ---
 
@@ -181,15 +213,16 @@ See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## License
 
-Licensed under [MIT](LICENSE).
+Licensed under the [MIT](LICENSE) license.
 
 ---
 
 ## Links
 
-- Repository: [github.com/muxover/nowpay-go](https://github.com/muxover/nowpay-go)
-- Issues: [github.com/muxover/nowpay-go/issues](https://github.com/muxover/nowpay-go/issues)
+- Repository: https://github.com/muxover/nowpay-go
+- Issues: https://github.com/muxover/nowpay-go/issues
 - Changelog: [CHANGELOG.md](CHANGELOG.md)
+- Go Reference: https://pkg.go.dev/github.com/muxover/nowpay-go
 
 ---
 
