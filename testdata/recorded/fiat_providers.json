@@ -1,0 +1,14 @@
+{
+  "result": [
+    {
+      "code": "guardarian",
+      "name": "Guardarian",
+      "enabled": true
+    },
+    {
+      "code": "transfi",
+      "name": "TransFi",
+      "enabled": true
+    }
+  ]
+}

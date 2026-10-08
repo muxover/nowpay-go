@@ -1,0 +1,40 @@
+{
+  "payouts": [
+    {
+      "id": "5000248325",
+      "batch_withdrawal_id": "5000145498",
+      "status": "FINISHED",
+      "error": null,
+      "currency": "trx",
+      "amount": "94.088939",
+      "address": "TAddr",
+      "extra_id": null,
+      "hash": "hash",
+      "ipn_callback_url": null,
+      "payout_description": null,
+      "is_request_payouts": true,
+      "unique_external_id": null,
+      "created_at": "2023-04-06T14:44:59.684Z",
+      "requested_at": "2023-04-06T14:45:55.505Z",
+      "updated_at": "2023-04-06T14:49:08.031Z"
+    },
+    {
+      "id": "5000247307",
+      "batch_withdrawal_id": "5000144539",
+      "status": "FINISHED",
+      "error": null,
+      "currency": "trx",
+      "amount": "10.000000",
+      "address": "TAddr",
+      "extra_id": null,
+      "hash": "hash",
+      "ipn_callback_url": null,
+      "payout_description": null,
+      "is_request_payouts": true,
+      "unique_external_id": null,
+      "created_at": "2023-04-05T19:21:40.836Z",
+      "requested_at": "2023-04-05T19:23:17.111Z",
+      "updated_at": "2023-04-05T19:27:30.895Z"
+    }
+  ]
+}

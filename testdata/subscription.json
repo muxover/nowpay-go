@@ -1,0 +1,14 @@
+{
+  "result": {
+    "id": "148427051",
+    "subscription_plan_id": "76215585",
+    "is_active": false,
+    "status": "WAITING_PAY",
+    "expire_date": "2022-10-10T13:46:18.476Z",
+    "subscriber": {
+      "email": "test@example.com"
+    },
+    "created_at": "2022-10-10T13:46:18.476Z",
+    "updated_at": "2022-10-10T13:46:18.476Z"
+  }
+}

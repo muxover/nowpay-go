@@ -1,0 +1,10 @@
+{
+  "result": [
+    {
+      "provider": "transfi",
+      "currencyCode": "USDTTRC20",
+      "currencyNetwork": "trx",
+      "enabled": true
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "currencies": [
+    {
+      "min_amount": 0.0970392,
+      "max_amount": 103.71101264,
+      "currency": "aave"
+    },
+    {
+      "min_amount": 67.42892,
+      "max_amount": 186047.6813042,
+      "currency": "xlm"
+    },
+    {
+      "min_amount": 0.0141474,
+      "max_amount": 50.27451119,
+      "currency": "zec"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "currencies": [
+    "btg",
+    "eth",
+    "xmr",
+    "zec",
+    "usdttrc20",
+    "btc"
+  ]
+}

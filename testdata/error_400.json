@@ -1,0 +1,6 @@
+{
+  "status": false,
+  "statusCode": 400,
+  "code": "INVALID_REQUEST_PARAMS",
+  "message": "For email subscriptions, only fiat currencies are available in plan"
+}

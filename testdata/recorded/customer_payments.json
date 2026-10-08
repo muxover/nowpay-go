@@ -1,0 +1,40 @@
+{
+  "result": [
+    {
+      "payment_id": "5373092876",
+      "invoice_id": "6414848611",
+      "order_id": null,
+      "order_description": null,
+      "original_price": "1 BTC",
+      "pay_price": "1 BTC",
+      "pay_amount": "1",
+      "pay_currency": "BTC",
+      "outcome_price": "83184.112512 USDTTRC20",
+      "outcome_amount": 0,
+      "outcome_currency": "USDTTRC20",
+      "status": "waiting",
+      "updated_at": "2026-09-27T23:10:22.363Z",
+      "created_at": "2026-09-27T23:09:45.140Z",
+      "exchange_data": {
+        "exchangeId": "redacted",
+        "status": "waiting",
+        "flow": "standard",
+        "fromCurrency": "btc",
+        "toCurrency": "usdttrc20",
+        "expectedSendAmount": 1,
+        "expectedReceiveAmount": 83184.112512,
+        "payinAddress": "redacted",
+        "payoutAddress": "redacted"
+      },
+      "type": "crypto2crypto",
+      "burning_percent": null,
+      "sub_partner_id": "356992164",
+      "is_fixed_rate": false,
+      "is_fee_paid_by_user": false,
+      "api_key_id": "1000000000",
+      "commission_percent": "0.5",
+      "commission_amount": null
+    }
+  ],
+  "count": 1
+}

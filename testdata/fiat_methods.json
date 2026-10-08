@@ -1,0 +1,17 @@
+{
+  "result": [
+    {
+      "name": "Bdo Network Bank",
+      "paymentCode": "ph_onb",
+      "fields": [
+        {
+          "name": "accountNumber",
+          "type": "String",
+          "mandatory": true,
+          "description": "Beneficiary account number"
+        }
+      ],
+      "provider": "transfi"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "currencies": [
+    {
+      "id": 121,
+      "code": "AAVE",
+      "name": "Aave",
+      "enable": true,
+      "wallet_regex": "^(0x)[0-9A-Fa-f]{40}$",
+      "priority": 127,
+      "extra_id_exists": false,
+      "extra_id_regex": null,
+      "logo_url": "/images/coins/aave.svg",
+      "track": true,
+      "cg_id": "aave",
+      "is_maxlimit": false,
+      "network": "eth",
+      "smart_contract": null,
+      "network_precision": null
+    }
+  ]
+}

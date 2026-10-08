@@ -1,0 +1,16 @@
+{
+  "result": [
+    {
+      "id": "943421599",
+      "subscription_plan_id": "1143462121",
+      "is_active": false,
+      "status": "WAITING_PAY",
+      "expire_date": "2026-09-27T23:09:43.535Z",
+      "subscriber": {
+        "email": "nowpay-go-live@example.com"
+      },
+      "created_at": "2026-09-27T23:09:43.535Z",
+      "updated_at": "2026-09-27T23:09:43.535Z"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "result": {
+    "rows": [
+      {
+        "id": "12345678909",
+        "provider": "transfi",
+        "requestId": "1234567890",
+        "status": "FINISHED",
+        "fiatCurrencyCode": "EUR",
+        "fiatAmount": "12.59",
+        "cryptoCurrencyCode": "BNBBSC",
+        "cryptoCurrencyAmount": "0.067",
+        "fiatAccountCode": "sepa_bank",
+        "fiatAccountNumber": "1234567890",
+        "payoutDescription": null,
+        "error": null,
+        "createdAt": "2023-10-27T16:25:59.977Z",
+        "updatedAt": "2023-10-27T16:25:59.977Z"
+      }
+    ]
+  }
+}

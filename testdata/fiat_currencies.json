@@ -1,0 +1,14 @@
+{
+  "result": [
+    {
+      "provider": "transfi",
+      "currencyCode": "EUR",
+      "enabled": true
+    },
+    {
+      "provider": "transfi",
+      "currencyCode": "PHP",
+      "enabled": true
+    }
+  ]
+}

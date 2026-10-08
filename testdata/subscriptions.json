@@ -1,0 +1,29 @@
+{
+  "result": [
+    {
+      "id": "1515573197",
+      "subscription_plan_id": "111394288",
+      "is_active": true,
+      "status": "PAID",
+      "expire_date": "2022-10-11T00:02:00.025Z",
+      "subscriber": {
+        "sub_partner_id": "111394288"
+      },
+      "created_at": "2022-10-09T22:15:50.808Z",
+      "updated_at": "2022-10-09T22:15:50.808Z"
+    },
+    {
+      "id": "111394288",
+      "subscription_plan_id": "111394288",
+      "is_active": false,
+      "status": "WAITING_PAY",
+      "expire_date": "2022-10-07T16:46:00.910Z",
+      "subscriber": {
+        "email": "test@example.com"
+      },
+      "created_at": "2022-10-06T16:40:28.880Z",
+      "updated_at": "2022-10-06T16:40:28.880Z"
+    }
+  ],
+  "count": 2
+}

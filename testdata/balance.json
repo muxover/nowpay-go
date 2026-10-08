@@ -1,0 +1,14 @@
+{
+  "eth": {
+    "amount": 0.0001817185463659148,
+    "pendingAmount": 0
+  },
+  "trx": {
+    "amount": 0,
+    "pendingAmount": 0
+  },
+  "xmr": {
+    "amount": 0,
+    "pendingAmount": 0
+  }
+}

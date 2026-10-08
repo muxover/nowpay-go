@@ -1,0 +1,24 @@
+{
+  "secret": "test-ipn-secret",
+  "note": "Signatures computed with Node.js crypto + JSON.stringify. keep: arrays kept; docs: sortObject from the NOWPayments docs.",
+  "cases": [
+    {
+      "name": "payment",
+      "body": "{\"payment_id\":123456789,\"parent_payment_id\":987654321,\"invoice_id\":null,\"payment_status\":\"finished\",\"pay_address\":\"address\",\"payin_extra_id\":null,\"price_amount\":1,\"price_currency\":\"usd\",\"pay_amount\":15,\"actually_paid\":15,\"actually_paid_at_fiat\":0,\"pay_currency\":\"trx\",\"order_id\":null,\"order_description\":null,\"purchase_id\":\"123456789\",\"outcome_amount\":14.8106,\"outcome_currency\":\"trx\",\"payment_extra_ids\":null,\"fee\":{\"currency\":\"btc\",\"depositFee\":0.09853637216235617,\"withdrawalFee\":0,\"serviceFee\":0}}\n",
+      "keep": "1c2c89dc00e6e37ada5a4c73ce6de55ad34d29cf2f5263f14777eb35e60197f3cc447c07f3f40f14e7c3ea7d2cdbd3edff8d069b7345c251b97f623ee6a021a3",
+      "docs": "1c2c89dc00e6e37ada5a4c73ce6de55ad34d29cf2f5263f14777eb35e60197f3cc447c07f3f40f14e7c3ea7d2cdbd3edff8d069b7345c251b97f623ee6a021a3"
+    },
+    {
+      "name": "escaping",
+      "body": "{\"order_description\":\"Tom & Jerry <b>x</b>   é 日本 \\\"q\\\" \\\\ \\n\\t\\u0001\",\"payment_id\":1,\"price_amount\":0.1,\"pay_amount\":1e-7,\"big\":1e+21,\"neg\":0,\"payment_status\":\"finished\"}",
+      "keep": "0e74ca882fb7e572302f84d287fd5dba6236c9c2952ab5b695b33dce85cc0000dd4b98cfe43d66dae73bf517349bff709ae832bcc9a1997cb420e49cf7ff5c69",
+      "docs": "0e74ca882fb7e572302f84d287fd5dba6236c9c2952ab5b695b33dce85cc0000dd4b98cfe43d66dae73bf517349bff709ae832bcc9a1997cb420e49cf7ff5c69"
+    },
+    {
+      "name": "arrays",
+      "body": "{\"payment_id\":5592161154,\"payment_status\":\"partially_paid\",\"payment_extra_ids\":[4526424492,4526424493],\"z\":{\"b\":1,\"a\":[{\"d\":1,\"c\":2}]}}",
+      "keep": "a7d7013535226ca71a2c9ab27a22b1a84e09f6abaaed98505a630c63a6b83fdc6df82ac2dc087c5f1e9dd28e5999e08247fcf4b77a27ab006fb63525b2f8ad95",
+      "docs": "3d0d614ea2f55425c6231f7cdc6442f508a95010fd6f56c4bf727f09bd8eb23318f80eaeb972286ef7c0b2a67a095b294a11e791ca1579a7953b4f06c7d86587"
+    }
+  ]
+}

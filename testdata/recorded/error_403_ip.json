@@ -1,0 +1,6 @@
+{
+  "status": false,
+  "statusCode": 403,
+  "code": "ENDPOINT_NOT_ALLOWED",
+  "message": "Access denied | Invalid IP - 203.0.113.7"
+}

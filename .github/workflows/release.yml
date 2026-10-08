@@ -1,0 +1,45 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: read
+
+jobs:
+  ci:
+    uses: ./.github/workflows/ci.yml
+
+  release:
+    needs: ci
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Resolve release notes
+        id: notes
+        run: |
+          notes="release-notes/${GITHUB_REF_NAME}.md"
+          if [ -f "$notes" ]; then
+            # "# NowPay Go v0.5.0 — Title" becomes the release name "v0.5.0 — Title".
+            echo "title=$(head -n 1 "$notes" | sed 's/^# NowPay Go //')" >> "$GITHUB_OUTPUT"
+            echo "body=$notes" >> "$GITHUB_OUTPUT"
+            echo "generate=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "title=${GITHUB_REF_NAME}" >> "$GITHUB_OUTPUT"
+            echo "generate=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: softprops/action-gh-release@v3
+        with:
+          name: ${{ steps.notes.outputs.title }}
+          body_path: ${{ steps.notes.outputs.body }}
+          generate_release_notes: ${{ steps.notes.outputs.generate }}
+
+      - name: Ask the Go module proxy to fetch the new version
+        run: curl -fsS "https://proxy.golang.org/github.com/muxover/nowpay-go/@v/${GITHUB_REF_NAME}.info"

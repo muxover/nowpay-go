@@ -1,0 +1,23 @@
+{
+  "payment_id": 6291776732,
+  "invoice_id": null,
+  "payment_status": "waiting",
+  "pay_address": "redacted",
+  "payin_extra_id": null,
+  "price_amount": 100,
+  "price_currency": "usd",
+  "pay_amount": 0.00118666,
+  "actually_paid": 0,
+  "pay_currency": "btc",
+  "order_id": "nowpay-go-live-1790550301",
+  "order_description": "nowpay-go live test",
+  "purchase_id": 4933037607,
+  "outcome_amount": null,
+  "outcome_currency": "usdttrc20",
+  "payout_hash": null,
+  "payin_hash": null,
+  "created_at": "2026-09-27T23:05:02.871Z",
+  "updated_at": "2026-09-27T23:05:02.871Z",
+  "burning_percent": "null",
+  "type": "crypto2crypto"
+}

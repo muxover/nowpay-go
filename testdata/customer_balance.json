@@ -1,0 +1,15 @@
+{
+  "result": {
+    "subPartnerId": "111394288",
+    "balances": {
+      "usddtrc20": {
+        "amount": 0.7,
+        "pendingAmount": 0
+      },
+      "usdtbsc": {
+        "amount": 1.0001341847350678,
+        "pendingAmount": 0
+      }
+    }
+  }
+}

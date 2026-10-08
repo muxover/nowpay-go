@@ -1,0 +1,16 @@
+{
+  "result": {
+    "rows": [
+      {
+        "provider": "transfi",
+        "fiatCurrencyCode": "PHP",
+        "providerAccountInfo": {
+          "currency": "PHP",
+          "paymentCode": "ph_aib"
+        },
+        "createdAt": "2023-10-11T14:32:44.236Z",
+        "updatedAt": "2023-10-11T14:32:44.236Z"
+      }
+    ]
+  }
+}

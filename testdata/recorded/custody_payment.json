@@ -1,0 +1,33 @@
+{
+  "result": {
+    "payment_id": "5373092876",
+    "payment_status": "waiting",
+    "pay_address": "redacted",
+    "price_amount": 1,
+    "price_currency": "btc",
+    "pay_amount": 1,
+    "amount_received": 83184.112512,
+    "pay_currency": "btc",
+    "order_id": null,
+    "order_description": null,
+    "payin_extra_id": null,
+    "ipn_callback_url": null,
+    "customer_email": null,
+    "created_at": "2026-09-27T23:09:45.140Z",
+    "updated_at": "2026-09-27T23:09:45.140Z",
+    "purchase_id": "4902564698",
+    "smart_contract": null,
+    "network": "btc",
+    "network_precision": null,
+    "time_limit": null,
+    "burning_percent": null,
+    "expiration_estimate_date": "2026-09-27T23:29:45.139Z",
+    "is_fixed_rate": false,
+    "is_fee_paid_by_user": false,
+    "valid_until": "2026-10-04T23:09:45.139Z",
+    "type": "crypto2crypto",
+    "product": "sub-partner-payment",
+    "origin_ip": null,
+    "invoice_id": "6414848611"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "status": false,
+  "statusCode": 404,
+  "code": "NOT_FOUND",
+  "message": "subscription not found"
+}
